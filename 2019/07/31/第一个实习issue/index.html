@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="干博的技术博客">
 <meta property="og:description" content="利用doxygen来生成API文档，利用nginx搭载静态服务器便于项目组成员查阅代码">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-13T18:50:51.488Z">
+<meta property="og:updated_time" content="2019-08-13T19:38:47.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第一个实习issue">
 <meta name="twitter:description" content="利用doxygen来生成API文档，利用nginx搭载静态服务器便于项目组成员查阅代码">
@@ -187,38 +187,60 @@
 </ul>
 <p>对应的例子如下：</p>
 <ul>
-<li>接口的功能<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/**  </span><br><span class="line">  * @param url the media loacation to play  </span><br><span class="line">  */  </span><br><span class="line">bool play(const std::string&amp;url);  </span><br><span class="line">```    </span><br><span class="line">*   接口输入参数需要遵循的条件</span><br><span class="line">```    </span><br><span class="line">/**   </span><br><span class="line">  * @param\[out\] dest The memory area to copy to   </span><br><span class="line">  * @param\[in\] src The memory area to copy from   </span><br><span class="line">  * @param\[in\] n The number of bytes to copy   </span><br><span class="line">  */   </span><br><span class="line">void memcpy(void \*dest,const void \*src,size.t n);  </span><br><span class="line">```    </span><br><span class="line">*   接口的返回值</span><br><span class="line">```   </span><br><span class="line">/**   </span><br><span class="line">  * @return true on success, false otherwise   </span><br><span class="line">  */   </span><br><span class="line">bool play(const std::string&amp;url);  </span><br><span class="line">```    </span><br><span class="line">*   接口的注意事项</span><br><span class="line">```    </span><br><span class="line">/**   </span><br><span class="line">  * @throw std::out\_of\_range if idx&gt;=vetor.size()   </span><br><span class="line">  */   </span><br><span class="line">bool vector::at(size_t idx);</span><br></pre></td></tr></table></figure>
+<li><p>接口的功能</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**  </span><br><span class="line">  * @param url the media loacation to play  </span><br><span class="line">  */  </span><br><span class="line">bool play(const std::string&amp;url);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口输入参数需要遵循的条件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**   </span><br><span class="line">  * @param\[out\] dest The memory area to copy to   </span><br><span class="line">  * @param\[in\] src The memory area to copy from   </span><br><span class="line">  * @param\[in\] n The number of bytes to copy   </span><br><span class="line">  */   </span><br><span class="line">void memcpy(void \*dest,const void \*src,size.t n);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口的返回值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**   </span><br><span class="line">  * @return true on success, false otherwise   </span><br><span class="line">  */   </span><br><span class="line">bool play(const std::string&amp;url);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接口的注意事项</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**   </span><br><span class="line">  * @throw std::out\_of\_range if idx&gt;=vetor.size()   </span><br><span class="line">  */   </span><br><span class="line">bool vector::at(size_t idx);</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p>/**   </p>
-<ul>
-<li>@warning application may crash. if dest or src is null   </li>
-<li>/<br>void memcpy(void *dest, const void *src, size.t n);  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">### cmake</span><br><span class="line"></span><br><span class="line">写好了代码，当然不希望每次都要手动生成`API`文档，更加希望每次代码编译的时候就能热生成`API`文档。`cmake`提供了这样的方法，只需将需要集成的工具的配置文件加入，然后编写`CMakeLists.txt`。工具就被集成到项目中了。</span><br><span class="line"></span><br><span class="line">### ninja</span><br><span class="line"></span><br><span class="line">一款编译器，如其名的快速编译。</span><br><span class="line"></span><br><span class="line">### nginx</span><br><span class="line"></span><br><span class="line">生成好了`API`文档，当然希望它可以被项目组的其他成员访问。利用`nginx`可以快速搭建一个静态服务器，只需告诉项目组成员的人端口号，项目组的成员即可查看文档。</span><br><span class="line"></span><br><span class="line">### 实现</span><br><span class="line"></span><br><span class="line">*   在分支中创建一个用于自己工作的文件夹`docs`</span><br><span class="line">*   在`docs`中插入`doxygen`的配置文件`Doxyfile`，`doxygen -g -s(用于省去注释)`</span><br><span class="line">*   配置`Doxyfile`，虽然配置文件中选项很多，但是我们需要修改的并不多，以下涉及一些cmake中定义的参数</span><br><span class="line">```    </span><br><span class="line">&lt;OUTPUT_DIRECTORY&gt; = (这一栏可以删去，在CMakeLists.txt中可以写)   </span><br><span class="line">&lt;INPUT&gt; = @PROJECT\_SOURCE\_DIR@   </span><br><span class="line">&lt;RECURSIVE&gt; = YES(可以递归地处理文档目录，类似-rf中r)   </span><br><span class="line">&lt;EXTRACT_ALL&gt; = YES   </span><br><span class="line">&lt;EXTRACT_PRIVATE&gt; = YES   </span><br><span class="line">&lt;EXTRACT_STATIC&gt; = YES   </span><br><span class="line">&lt;GENERATE_LATEX&gt; = NO   </span><br><span class="line">&lt;SOURCE_BROWSER&gt; = YES  </span><br><span class="line">```    </span><br><span class="line">*   配置`cmake`，在`docs`中创建一个`CMakeLists.txt`，然后进行编辑</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/**   </span><br><span class="line">  * @warning application may crash. if dest or src is null   </span><br><span class="line">  */   </span><br><span class="line">void memcpy(void \*dest, const void \*src, size.t n);</span><br></pre></td></tr></table></figure>
 
+<h3 id="cmake"><a href="#cmake" class="headerlink" title="cmake"></a>cmake</h3><p>写好了代码，当然不希望每次都要手动生成<code>API</code>文档，更加希望每次代码编译的时候就能热生成<code>API</code>文档。<code>cmake</code>提供了这样的方法，只需将需要集成的工具的配置文件加入，然后编写<code>CMakeLists.txt</code>。工具就被集成到项目中了。</p>
+<h3 id="ninja"><a href="#ninja" class="headerlink" title="ninja"></a>ninja</h3><p>一款编译器，如其名的快速编译。</p>
+<h3 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h3><p>生成好了<code>API</code>文档，当然希望它可以被项目组的其他成员访问。利用<code>nginx</code>可以快速搭建一个静态服务器，只需告诉项目组成员的人端口号，项目组的成员即可查看文档。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li><p>在分支中创建一个用于自己工作的文件夹<code>docs</code></p>
+</li>
+<li><p>在<code>docs</code>中插入<code>doxygen</code>的配置文件<code>Doxyfile</code>，<code>doxygen -g -s(用于省去注释)</code></p>
+</li>
+<li><p>配置<code>Doxyfile</code>，虽然配置文件中选项很多，但是我们需要修改的并不多，以下涉及一些cmake中定义的参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;OUTPUT_DIRECTORY&gt; = (这一栏可以删去，在CMakeLists.txt中可以写)   </span><br><span class="line">&lt;INPUT&gt; = @PROJECT\_SOURCE\_DIR@   </span><br><span class="line">&lt;RECURSIVE&gt; = YES(可以递归地处理文档目录，类似-rf中r)   </span><br><span class="line">&lt;EXTRACT_ALL&gt; = YES   </span><br><span class="line">&lt;EXTRACT_PRIVATE&gt; = YES   </span><br><span class="line">&lt;EXTRACT_STATIC&gt; = YES   </span><br><span class="line">&lt;GENERATE_LATEX&gt; = NO   </span><br><span class="line">&lt;SOURCE_BROWSER&gt; = YES</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置<code>cmake</code>，在<code>docs</code>中创建一个<code>CMakeLists.txt</code>，然后进行编辑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># add a target to generate API documentation with Doxygen  </span><br><span class="line">IF(NEED_TO_GENERATE_DOCUMENT)  ///  编译时传入参数，控制文档生成   </span><br><span class="line">FIND_PACKAGE(Doxygen)  ///  确认有系统中`doxygen`   </span><br><span class="line">OPTION(BUILD_DOCUMENTATION &quot;Create and install the HTML based API documentation (requires Doxygen)&quot; $&#123;DOXYGEN_FOUND&#125;) ///  生成文档是`cmake`中的一个选项   </span><br><span class="line">IF(BUILD_DOCUMENTATION)   </span><br><span class="line"> IF(NOT DOXYGEN_FOUND)   </span><br><span class="line"> MESSAGE(FATAL_ERROR &quot;Doxygen is needed to build the documentation.&quot;)  </span><br><span class="line"> ENDIF()  ///  再次确认系统中有`doxygen`   </span><br><span class="line">    </span><br><span class="line"> SET(doxyfile $&#123;CMAKE_CURRENT_SOURCE_DIR&#125;/Doxyfile) ///  别名  </span><br><span class="line"> SET(doxyfile $&#123;CMAKE_CURRENT_BINARY_DIR&#125;/Doxyfile) ///  别名   </span><br><span class="line">    </span><br><span class="line"> ///将源代码中一些cmake形参通过cmake变成实参   </span><br><span class="line"> CONFIGURE_FILE($&#123;doxyfile&#125; $&#123;doxyfile&#125; @ONLY)   </span><br><span class="line">    </span><br><span class="line"> ADD_CUSTOM\TARGET(doc   </span><br><span class="line"> COMMAND $&#123;DOXYGEN_EXECUTABLE&#125; $&#123;doxyfile&#125;   </span><br><span class="line"> WORKING_DIRECTORY $&#123;CMAKE_CURRENT_BINARY_DIR&#125;   </span><br><span class="line"> COMMENT &quot;Generating API documentation with Doxygen&quot;   </span><br><span class="line"> VERBATIM)  ///把编译时需要的东西列出来   </span><br><span class="line">    </span><br><span class="line"> INSTALL(DIRECTORY $&#123;CMAKE\_CURRENT\_BINARY_DIR&#125;/html DESTINATION share/doc/html)  ///输出文档，并在宿主机上进行拷贝   </span><br><span class="line">ENDIF()   </span><br><span class="line">ENDIF()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>利用cmake和ninja对源代码进行编译，<code>cmake -G Ninja -D NEED_TO_GENERATE_DOCUMENT=ON ..</code>，<code>ninja</code></p>
+</li>
+<li><p>可以在<code>docs/html</code>中看到生成的<code>html</code>文件了</p>
+</li>
+<li><p>由于在宿主机上拷贝了一份<code>html</code>，可以方便的利用<code>nginx</code>搭载静态服务器来展示内容了</p>
+</li>
+<li><p>创建一个<code>nginx</code>容器，<code>docker run --name [docker_name](mynginx) -P -d -v /share/doc/html:/usr/share/nginx/html nginx</code></p>
+</li>
+<li><p>配置<code>nginx</code>容器，如果你的静态服务器要给大量的人访问，最好配置一下，不让电脑顶不住，我因为是给项目组的人看，所以没有配置</p>
+</li>
+<li><p>利用<code>docker ps</code>查看宿主机的哪个端口同容器链接了，在浏览器中输入<code>[localhost_ip]:[port_id]</code>即可访问文件</p>
+</li>
+<li><p>提交项目，提交<code>issue</code>，完成<code>issue</code></p>
 </li>
 </ul>
-<h1 id="add-a-target-to-generate-API-documentation-with-Doxygen"><a href="#add-a-target-to-generate-API-documentation-with-Doxygen" class="headerlink" title="add a target to generate API documentation with Doxygen"></a>add a target to generate API documentation with Doxygen</h1><p>IF(NEED_TO_GENERATE_DOCUMENT)  ///  编译时传入参数，控制文档生成<br>FIND_PACKAGE(Doxygen)  ///  确认有系统中<code>doxygen</code><br>OPTION(BUILD_DOCUMENTATION “Create and install the HTML based API documentation (requires Doxygen)” ${DOXYGEN_FOUND}) ///  生成文档是<code>cmake</code>中的一个选项<br>IF(BUILD_DOCUMENTATION)<br> IF(NOT DOXYGEN_FOUND)<br> MESSAGE(FATAL_ERROR “Doxygen is needed to build the documentation.”)<br> ENDIF()  ///  再次确认系统中有<code>doxygen</code>   </p>
-<p> SET(doxyfile ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile) ///  别名<br> SET(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile) ///  别名   </p>
-<p> ///将源代码中一些cmake形参通过cmake变成实参<br> CONFIGURE_FILE(${doxyfile} ${doxyfile} @ONLY)   </p>
-<p> ADD_CUSTOM\TARGET(doc<br> COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}<br> WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}<br> COMMENT “Generating API documentation with Doxygen”<br> VERBATIM)  ///把编译时需要的东西列出来   </p>
-<p> INSTALL(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION share/doc/html)  ///输出文档，并在宿主机上进行拷贝<br>ENDIF()<br>ENDIF()  </p>
-<pre><code>*   利用cmake和ninja对源代码进行编译，`cmake -G Ninja -D NEED_TO_GENERATE_DOCUMENT=ON ..`，`ninja`
-*   可以在`docs/html`中看到生成的`html`文件了
-*   由于在宿主机上拷贝了一份`html`，可以方便的利用`nginx`搭载静态服务器来展示内容了
-*   创建一个`nginx`容器，`docker run --name [docker_name](mynginx) -P -d -v /share/doc/html:/usr/share/nginx/html nginx`
-*   配置`nginx`容器，如果你的静态服务器要给大量的人访问，最好配置一下，不让电脑顶不住，我因为是给项目组的人看，所以没有配置
-*   利用`docker ps`查看宿主机的哪个端口同容器链接了，在浏览器中输入`[localhost_ip]:[port_id]`即可访问文件
-*   提交项目，提交`issue`，完成`issue`
+<h3 id="issue收获"><a href="#issue收获" class="headerlink" title="issue收获"></a><code>issue</code>收获</h3><ul>
+<li>学习规范的编程，学习规范的注释</li>
+<li>学习<code>cmake</code>语法</li>
+<li>了解<code>cmake</code>预定义参数</li>
+<li>了解<code>doxygen</code>配置</li>
+<li>了解<code>ninja</code></li>
+<li>了解如何利用<code>nginx</code>搭载静态服务器</li>
+</ul>
 
-### `issue`收获
-
-*   学习规范的编程，学习规范的注释
-*   学习`cmake`语法
-*   了解`cmake`预定义参数
-*   了解`doxygen`配置
-*   了解`ninja`
-*   了解如何利用`nginx`搭载静态服务器</code></pre>
       
 
       
@@ -391,7 +413,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#doxygen"><span class="toc-number">1.</span> <span class="toc-text">doxygen</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#add-a-target-to-generate-API-documentation-with-Doxygen"><span class="toc-number"></span> <span class="toc-text">add a target to generate API documentation with Doxygen</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#doxygen"><span class="toc-number">1.</span> <span class="toc-text">doxygen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cmake"><span class="toc-number">2.</span> <span class="toc-text">cmake</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ninja"><span class="toc-number">3.</span> <span class="toc-text">ninja</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nginx"><span class="toc-number">4.</span> <span class="toc-text">nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现"><span class="toc-number">5.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#issue收获"><span class="toc-number">6.</span> <span class="toc-text">issue收获</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -580,14 +602,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">doxygen</a>
               </li>
              
@@ -601,6 +615,14 @@ var _hmt = _hmt || [];
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
             
             <div class="clearfix"></div>

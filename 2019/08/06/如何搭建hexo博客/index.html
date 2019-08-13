@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="干博的技术博客">
 <meta property="og:description" content="博主为mac pro，首先打开终端，进入自己用户名的目录下，获取root权限sudo su">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-13T18:57:36.145Z">
+<meta property="og:updated_time" content="2019-08-13T19:34:45.396Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建hexo博客">
 <meta name="twitter:description" content="博主为mac pro，首先打开终端，进入自己用户名的目录下，获取root权限sudo su">
@@ -182,25 +182,25 @@
 <li>在自己用户名的目录下创建一个新的文件夹blog，这既是hexo的要求，也是良好编程的要求，<code>mkdir blog</code></li>
 <li>进入blog，<code>cd blog</code></li>
 <li>初始化博客， <code>hexo init</code></li>
-<li><em>如果下载很慢，可以用这种方法来获得加速。另外打开一个终端，执行<code>sudo vim /etc/hosts</code>，对hosts进行编辑，在文件结尾加上如下代码</em><br>```    </li>
+<li><em>如果下载很慢，可以用这种方法来获得加速。另外打开一个终端，执行<code>sudo vim /etc/hosts</code>，对hosts进行编辑，在文件结尾加上如下代码</em> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">192.30.253.112 github.com   </span><br><span class="line">151.101.185.194 github.global.ssl.fastly.net</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
-<p>192.30.253.112 github.com<br>151.101.185.194 github.global.ssl.fastly.net  </p>
-<pre><code>
-*前往[查询](http://github.global.ssl.fastly.net.ipaddress.com/)，获得github.com和github.global.ssl.fastly.net的ip，ttl值理论上来说越小ip网速越快，代码中的ip并非是最好的，可以多次尝试，ip会几个月变动一次，注意及时更新*
-
-### 部署博客
-
-*   登入github，注册一个账号，需要翻墙，使用不需要翻墙
-
-*   创建一个自己的本地仓库repository，名字必须为`[github_name].github.io`
-
-*   回到第一个终端，安装仓库和宿主机链接的工具 `cnpm install --save hexo-deployer-git`
-
-*   进行配置，`vim _config.yml`，移动到`Deploment`</code></pre><p>deploy:<br>  type: git<br>  repo: <a href="https://github.com/\[github\_name\]/\[github\_name\].github.io.git" target="_blank" rel="noopener">https://github.com/\[github\_name\]/\[github\_name\].github.io.git</a><br>  branch: master  </p>
-<pre><code>*   部署到远端，`hexo d`，输入github账号，密码，第一次还要创建钥匙串
-
-
-# 浏览器输入[github_name].github.io就可以访问了</code></pre>
+<p><em>前往<a href="http://github.global.ssl.fastly.net.ipaddress.com/" target="_blank" rel="noopener">查询</a>，获得github.com和github.global.ssl.fastly.net的ip，ttl值理论上来说越小ip网速越快，代码中的ip并非是最好的，可以多次尝试，ip会几个月变动一次，注意及时更新</em></p>
+<h3 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h3><ul>
+<li><p>登入github，注册一个账号，需要翻墙，使用不需要翻墙</p>
+</li>
+<li><p>创建一个自己的本地仓库repository，名字必须为<code>[github_name].github.io</code></p>
+</li>
+<li><p>回到第一个终端，安装仓库和宿主机链接的工具 <code>cnpm install --save hexo-deployer-git</code></p>
+</li>
+<li><p>进行配置，<code>vim _config.yml</code>，移动到<code>Deploment</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:   </span><br><span class="line">  type: git   </span><br><span class="line">  repo: https://github.com/\[github\_name\]/\[github\_name\].github.io.git   </span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>部署到远端，<code>hexo d</code>，输入github账号，密码，第一次还要创建钥匙串</p>
+</li>
+</ul>
+<h1 id="浏览器输入-github-name-github-io就可以访问了"><a href="#浏览器输入-github-name-github-io就可以访问了" class="headerlink" title="浏览器输入[github_name].github.io就可以访问了"></a>浏览器输入[github_name].github.io就可以访问了</h1>
       
 
       
@@ -345,7 +345,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装环境"><span class="toc-number">1.</span> <span class="toc-text">安装环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化博客"><span class="toc-number">2.</span> <span class="toc-text">初始化博客</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装环境"><span class="toc-number">1.</span> <span class="toc-text">安装环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始化博客"><span class="toc-number">2.</span> <span class="toc-text">初始化博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#部署博客"><span class="toc-number">3.</span> <span class="toc-text">部署博客</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浏览器输入-github-name-github-io就可以访问了"><span class="toc-number"></span> <span class="toc-text">浏览器输入[github_name].github.io就可以访问了</span></a>
                     </div>
                 </span>
             </div>
@@ -534,14 +534,6 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">doxygen</a>
               </li>
              
@@ -555,6 +547,14 @@ var _hmt = _hmt || [];
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
               </li>
             
             <div class="clearfix"></div>
