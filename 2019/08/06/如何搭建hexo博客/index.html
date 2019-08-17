@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head><meta name="generator" content="Hexo 3.9.0">
@@ -16,7 +17,7 @@
 <meta property="og:site_name" content="干博的技术博客">
 <meta property="og:description" content="博主为mac pro，首先打开终端，进入自己用户名的目录下，获取root权限sudo su">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-13T19:34:45.396Z">
+<meta property="og:updated_time" content="2019-08-17T14:21:21.332Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何搭建hexo博客">
 <meta name="twitter:description" content="博主为mac pro，首先打开终端，进入自己用户名的目录下，获取root权限sudo su">
@@ -27,6 +28,10 @@
     <link rel="icon" href="/assets/favicon.png">
   
   <link rel="stylesheet" type="text/css" href="/./main.0cf68a.css">
+  
+  <link href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/./txbh.css">
+
   <style type="text/css">
   
     #container.show {
@@ -42,9 +47,9 @@
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
-    <div class="left-col" q-class="show:isShow">
+    <div class="left-col" q-class="show:isShow" style="background: url(/assets/girl1.jpg)no-repeat 100%;background-size:cover;">
       
-<div class="overlay" style="background: #4d4d4d"></div>
+<div class="overlay" style="background: rgba(0,0,0,0)"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -97,7 +102,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: #4d4d4d"></div>
+  	<div class="overlay js-overlay" style="background: rgba(0,0,0,0)"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -186,7 +191,7 @@
 
 </li>
 </ul>
-<p><em>前往<a href="http://github.global.ssl.fastly.net.ipaddress.com/" target="_blank" rel="noopener">查询</a>，获得github.com和github.global.ssl.fastly.net的ip，ttl值理论上来说越小ip网速越快，代码中的ip并非是最好的，可以多次尝试，ip会几个月变动一次，注意及时更新</em></p>
+<p><em>前往<a href="http://tool.chinaz.com/dns?type=1&host=github.com&ip=" target="_blank" rel="noopener">查询</a>，获得github.com和github.global.ssl.fastly.net的ip，ttl值理论上来说越小ip网速越快，代码中的ip并非是最好的，可以多次尝试，ip会几个月变动一次，注意及时更新</em></p>
 <h3 id="部署博客"><a href="#部署博客" class="headerlink" title="部署博客"></a>部署博客</h3><ul>
 <li><p>登入github，注册一个账号，需要翻墙，使用不需要翻墙</p>
 </li>
@@ -195,7 +200,7 @@
 <li><p>回到第一个终端，安装仓库和宿主机链接的工具 <code>cnpm install --save hexo-deployer-git</code></p>
 </li>
 <li><p>进行配置，<code>vim _config.yml</code>，移动到<code>Deploment</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:   </span><br><span class="line">  type: git   </span><br><span class="line">  repo: https://github.com/\[github\_name\]/\[github\_name\].github.io.git   </span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:   </span><br><span class="line">  type: git   </span><br><span class="line">  repo: https://github.com/[github_name]/[github_name].github.io.git   </span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>部署到远端，<code>hexo d</code>，输入github账号，密码，第一次还要创建钥匙串</p>
 </li>
@@ -315,6 +320,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/08/07/第二个实习的issue/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          第二个实习的issue
+        
+      </div>
+    </a>
   
   
     <a href="/2019/07/31/第一个实习issue/" id="article-nav-older" class="article-nav-link-wrap">
@@ -534,6 +548,14 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">doxygen</a>
               </li>
              
@@ -550,11 +572,19 @@ var _hmt = _hmt || [];
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搭建</a>
+                <a href="javascript:void(0)" class="js-tag color1">googletest</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">博客</a>
+                <a href="javascript:void(0)" class="js-tag color4">unittest</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">sphinx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">rst</a>
               </li>
             
             <div class="clearfix"></div>
