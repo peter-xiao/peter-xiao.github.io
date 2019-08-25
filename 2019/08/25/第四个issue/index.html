@@ -8,15 +8,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://peter-xiao.github.io">
-  <title>Archives | 干博的技术博客</title>
+  <title>第四个issue | 干博的技术博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="干博的技术博客">
-<meta property="og:url" content="http://peter-xiao.github.io/archives/page/2/index.html">
+  <meta name="description" content="编译器前端的工作是具有概括性的，创造性的。下面的例子以go作为参考。">
+<meta name="keywords" content="lexer,parser,sourcegraph">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第四个issue">
+<meta property="og:url" content="http://peter-xiao.github.io/2019/08/25/第四个issue/index.html">
 <meta property="og:site_name" content="干博的技术博客">
+<meta property="og:description" content="编译器前端的工作是具有概括性的，创造性的。下面的例子以go作为参考。">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-25T17:57:19.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="干博的技术博客">
+<meta name="twitter:title" content="第四个issue">
+<meta name="twitter:description" content="编译器前端的工作是具有概括性的，创造性的。下面的例子以go作为参考。">
   
     <link rel="alternative" href="/atom.xml" title="干博的技术博客" type="application/atom+xml">
   
@@ -158,52 +163,103 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-第四个issue" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第四个issue
+    </h1>
+  
+
+        
+        <a href="/2019/08/25/第四个issue/" class="archive-article-date">
+  	<time datetime="2019-08-25T08:27:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>编译器前端的工作是具有概括性的，创造性的。下面的例子以<code>go</code>作为参考。</p>
+<a id="more"></a>
+<p>作为入门级的一个<code>issue</code>，导师让我写<code>parser</code>一个节点的信息。主要参考<code>BNF</code>，部分地方需要参考<code>lexer</code>来完成。</p>
+<h3 id="lexer"><a href="#lexer" class="headerlink" title="lexer"></a>lexer</h3><p>词法分析阶段就是编译过程的第一阶段。将用文本编辑器编辑好的源文件转化为二元组<code>&lt;token，value&gt;</code>的形式。需要识别的包括六部分，关键字，标识符，注释，常量，操作符，括号等表示结构的符号。通过定义一个名为<code>scanner</code>的结构体，主要借助<code>next</code>和<code>scan</code>的方法（用到的其他方法是用来进行类型判断的）来完成整个词法分析的流程。这个结构体重要的四个参数为： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ch //当前字符</span><br><span class="line">offset //当前字符位置</span><br><span class="line">rdOffset //当前字符位置+1</span><br><span class="line">lineOffset //记录每一行末尾的offset</span><br></pre></td></tr></table></figure>
+
+<p>词法分析器本质上就是一个状态机，而该状态机总是需要以当前字符作为输入。借助<code>next</code>方法，可以读取当前字符的下一个字符，这个方法有以下几个作用：</p>
+<ul>
+<li>判断读取是否到达字符流末，从而决定是否继续读取。 </li>
+<li>判断读取是否到达行末，从而决定是否更新<code>lineOffest</code> </li>
+<li>判断读取是否为<code>UTF-8</code>，从而决定是否报错 </li>
+</ul>
+<p>核心是<code>scan</code>方法，它是如上所说的状态机。对于<code>sacn</code>的每次调用都会返回一个<code>token</code>。它的功能主要是以下几点：</p>
+<ul>
+<li>通过当前字符的switch语句，判断当前字符是否为一个单字符标识符，如果不是的话，需要判断是否是关键词还是多字符标识符。</li>
+<li>通过一个嵌套的switch语句，利用当前字符的下一个字符来判断当前字符类型。这个语句大概有30种情况，并且某些语句下还有条件语句嵌套。</li>
+</ul>
+<p>剩下的方法都可见名知义，<code>scanComment</code>，<code>scanIdentifier</code>，<code>scanString</code>，<code>scanRawString</code>，<code>skipWhitespace</code>，这些方法都会被<code>scanner</code>调用。</p>
+<h3 id="parser"><a href="#parser" class="headerlink" title="parser"></a>parser</h3><p>这个是用来读入<code>&lt;token,value&gt;</code>，生成<code>AST</code>。</p>
+<h3 id="sourcegraph"><a href="#sourcegraph" class="headerlink" title="sourcegraph"></a>sourcegraph</h3><p>这个在<code>chrome</code>的拓展商店就能下载，可以方便的查看<code>go</code>的源码，因为只要将鼠标放到函数或者标识符上，它会自动在源码内搜索，给出相关的<code>definition</code>和<code>referrnces</code>。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢老板<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/30/linux的一些常用指令/" class="archive-article-date">
-  	<time datetime="2019-07-29T18:22:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/30/linux的一些常用指令/">linux的一些常用指令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">常用</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">lexer</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">parser</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">sourcegraph</a>
         		</li>
       		
 		</ul>
 	</div>
-
-          
+ 
+      <span id="busuanzi_container_page_pv">
+      |阅读量(<span id="busuanzi_value_page_pv"></span>)
+      </span>
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -216,138 +272,144 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://qr.liantu.com/api.php?text=http://peter-xiao.github.io/2019/08/25/第四个issue/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/30/docker的一些常用指令/" class="archive-article-date">
-  	<time datetime="2019-07-29T18:17:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-30</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/08/26/安装及配置hadoop/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          安装及配置hadoop
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/08/18/谈实习/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">谈实习</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/30/docker的一些常用指令/">docker的一些常用指令</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">笔记</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/实习//" class="article-tag-list-link color3">实习</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#lexer"><span class="toc-number">1.</span> <span class="toc-text">lexer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#parser"><span class="toc-number">2.</span> <span class="toc-text">parser</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sourcegraph"><span class="toc-number">3.</span> <span class="toc-text">sourcegraph</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/29/在公司开始一个项目/" class="archive-article-date">
-  	<time datetime="2019-07-28T18:05:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-29</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/29/在公司开始一个项目/">在公司开始一个项目</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">docker</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">tmux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vim</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">putty</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/实习//" class="article-tag-list-link color3">实习</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
     
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+  
+  
+
+  
+
+  
+
+  
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+ <script src="https://billts.site/js/gitment.js"></script>
+<script>
+var gitment = new Gitment({
+  id: 'Sun Aug 25 2019 16:27:49 GMT+0800',
+  owner: 'peter-xiao',
+  repo: 'peter-xiao.github.io',
+  oauth: {
+    client_id: 'd21d61ae70e0ec29aaf0',
+    client_secret: '4f0dc9d412ca45cd61bba63419a216f959ea83a9',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+
   
 
 
@@ -384,8 +446,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
